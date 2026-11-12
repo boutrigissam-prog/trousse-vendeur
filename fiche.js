@@ -255,6 +255,7 @@
 
   // ---------- liste de fiches ----------
   var fiches = [], cour = null, elBarre = document.getElementById('fiche-en-cours'), elCompte = document.getElementById('mes-fiches');
+  var elEnregistree = document.getElementById('fiche-enregistree');
   var elPanneau = document.getElementById('panneau'), elListe = document.getElementById('p-liste'), elPStatut = document.getElementById('p-statut');
   var elBloque = document.createElement('p');
   elBloque.className = 'erreur'; elBloque.hidden = true; elBloque.textContent = MSG_BLOQUE;
@@ -275,6 +276,19 @@
   function majBarre() {
     elBarre.textContent = 'Fiche en cours : ' + (cour.nom || 'Nouvelle fiche');
     elCompte.textContent = 'Mes fiches (' + fiches.length + ')';
+    elEnregistree.textContent = fiches.indexOf(cour) >= 0
+      ? '✓ Enregistrée sur ce téléphone à ' + cour.modifiee.slice(-5)
+      : 'Pas encore enregistrée';
+  }
+  function aDuContenu(e) {
+    return Object.keys(e.champs).some(function (k) { var v = e.champs[k]; return Array.isArray(v) ? v.length : !!v; }) ||
+      e.services.some(function (s) { return s.nom || s.prix || s.duree; });
+  }
+  // Retour visible sur le bouton touché (le message du bas peut être hors de l'écran).
+  function confirmerSurBouton(bouton, texte) {
+    var avant = bouton.textContent;
+    bouton.textContent = texte;
+    setTimeout(function () { bouton.textContent = avant; }, 2000);
   }
   function ajouterSiAbsente() { if (fiches.indexOf(cour) < 0) fiches.push(cour); }
   function sauver() {
@@ -296,7 +310,14 @@
     cour = f; appliquer(f.etat); reinitialiserErreurs(); majBarre(); ecrireCle(CLE_COURANTE, f.id);
   }
   function ouvrir(f) { afficher(f); fermerPanneau(); window.scrollTo(0, 0); }
-  function nouvelle() { afficher(nouvelleFiche()); fermerPanneau(); message('Nouvelle fiche prête.'); window.scrollTo(0, 0); }
+  function nouvelle() {
+    var e = etat(), precedente = '';
+    if (aDuContenu(e)) { sauver(); precedente = cour.nom || 'sans nom'; }
+    afficher(nouvelleFiche()); fermerPanneau(); window.scrollTo(0, 0);
+    document.getElementById('enregistrer').textContent = 'Enregistrer';
+    message(precedente ? 'Fiche « ' + precedente + ' » enregistrée. Nouvelle fiche ouverte.' : 'Nouvelle fiche ouverte.');
+    confirmerSurBouton(document.getElementById('nouvelle'), precedente ? '✓ Ancienne gardée' : '✓ Prête');
+  }
   function recentes() {
     return fiches.slice().sort(function (a, b) { return a.modifiee < b.modifiee ? 1 : a.modifiee > b.modifiee ? -1 : (a.creee < b.creee ? 1 : -1); });
   }
@@ -340,8 +361,10 @@
       });
     } else copier(f.texte, 'Partage indisponible ici : la fiche a été copiée.', marquerEnvoyee);
   });
-  document.getElementById('copier').addEventListener('click', function () {
-    if (valider()) copier(construire(etat()).texte, 'Fiche copiée.', marquerEnvoyee);
+  document.getElementById('enregistrer').addEventListener('click', function () {
+    sauver();
+    message('✓ Fiche ' + (cour.nom ? '« ' + cour.nom + ' » ' : '') + 'enregistrée sur ce téléphone.' + (cour.nom ? '' : ' Pense à mettre le nom du commerce.'));
+    confirmerSurBouton(this, '✓ Enregistrée');
   });
   document.getElementById('telecharger').addEventListener('click', function () {
     if (!valider()) return;

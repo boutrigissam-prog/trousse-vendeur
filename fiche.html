@@ -25,7 +25,7 @@
 <div class="badge-ligne"><span class="badge">Version d'essai · 13 novembre 2026</span></div>
 <nav class="barre-site" aria-label="Navigation"><a href="index.html">Guide</a><a href="exemples.html">Exemples</a><a href="fiche.html" aria-current="page">Fiche</a></nav>
 <main class="contenu">
-<div class="barre-fiche"><span id="fiche-en-cours">Fiche en cours : Nouvelle fiche</span><button type="button" class="btn clair" id="mes-fiches">Mes fiches (0)</button></div>
+<div class="barre-fiche"><span><span id="fiche-en-cours">Fiche en cours : Nouvelle fiche</span><br><small id="fiche-enregistree" style="font-weight:600">Pas encore enregistrée</small></span><button type="button" class="btn clair" id="mes-fiches">Mes fiches (0)</button></div>
 <h1>Fiche terrain</h1>
 <p class="lead">2 minutes : remplis l'essentiel, on s'occupe du reste.</p>
 <p class="aide" style="margin-top:-8px">Les champs avec * sont obligatoires. La fiche s'enregistre toute seule sur ce téléphone.</p>
@@ -221,10 +221,10 @@
 </main>
 
 <div class="barre-actions">
+  <button type="button" class="btn" id="enregistrer">Enregistrer</button>
   <button type="button" class="btn" id="partager">Partager la fiche</button>
-  <button type="button" class="btn sec" id="copier">Copier</button>
-  <button type="button" class="btn sec" id="telecharger">Télécharger (.txt)</button>
   <button type="button" class="btn sec" id="nouvelle">Nouvelle fiche</button>
+  <button type="button" class="btn sec" id="telecharger">Télécharger (.txt)</button>
 </div>
 <section id="panneau" hidden aria-label="Mes fiches"><div class="interne">
   <h2>Mes fiches</h2>
