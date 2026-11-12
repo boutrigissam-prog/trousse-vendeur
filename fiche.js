@@ -182,13 +182,14 @@
       ['8. Matériel', [['Logo', c.logo], ['Photos', c.photos], ['Vidéo', c.video], ['Lien photos et vidéos', c.lien_medias]]],
       ['9. Notes', [['Notes', c.notes], ['CE QUI MANQUE', c.ce_qui_manque], ['Accepte d\'être recontacté', c.recontact ? 'oui' : '']]]
     ];
-    var out = ['FICHE TERRAIN · ' + (c.nom || 'Sans nom') + ' · ' + aujourdhui()];
+    var out = ['FICHE TERRAIN · ' + (c.nom || 'Sans nom') + ' · ' + aujourdhui(), 'Code dossier : ' + codeDossier(c.nom)];
     sections.forEach(function (s) {
       var lignes = s[1].filter(function (p) { return p[1]; }).map(function (p) { return p[0] ? p[0] + ' : ' + p[1] : '- ' + p[1]; });
       if (lignes.length) out.push('', s[0].toUpperCase(), lignes.join('\n'));
     });
     var donnees = {
       'Date': aujourdhui(),
+      'Code dossier': codeDossier(c.nom),
       'Commerce': { 'Nom': c.nom || '', 'Famille': c.famille || '', 'Métier': c.metier || '', 'Adresse': c.adresse || '', 'Quartier': c.quartier || '', 'Téléphone': c.tel || '', 'Courriel': c.courriel || '', 'Site': c.site || '', 'Facebook': c.facebook || '', 'Instagram': c.instagram || '', 'Fiche Google': c.google || '', 'Langues': langues },
       'Responsable': { 'Nom': c.resp_nom || '', 'Rôle': c.resp_role || '', 'Courriel': c.resp_courriel || '', 'Cellulaire': c.resp_cell || '' },
       'Services': e.services.filter(function (s) { return s.nom || s.prix || s.duree; }).map(function (s) { return { 'Nom': s.nom, 'À partir de': s.prix, 'Durée': s.duree }; }),
@@ -202,6 +203,11 @@
       'Accepte d\'être recontacté': !!c.recontact
     };
     return { titre: 'Fiche terrain · ' + (c.nom || 'Sans nom'), texte: out.join('\n') + '\n\n--- données ---\n' + JSON.stringify(donnees, null, 2), nom: c.nom || '' };
+  }
+  // Un seul nom de dossier par commerce, toujours le même : « Garage Matte » → « garage-matte ».
+  function codeDossier(nom) {
+    return (nom || 'sans-nom').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+      .replace(/&/g, ' et ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'sans-nom';
   }
   function aujourdhui() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 
