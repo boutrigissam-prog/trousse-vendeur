@@ -12,12 +12,13 @@
 <nav class="barre-site" aria-label="Navigation"><a href="index.html">Guide</a><a href="exemples.html">Exemples</a><a href="fiche.html" aria-current="page">Fiche</a></nav>
 <main class="contenu">
 <h1>Fiche terrain</h1>
-<p class="lead">À remplir pendant ou après la visite. Les champs avec * sont obligatoires. Le brouillon s'enregistre tout seul sur ce téléphone.</p>
+<p class="lead">2 minutes : remplis l'essentiel, on s'occupe du reste.</p>
+<p class="aide" style="margin-top:-8px">Les champs avec * sont obligatoires. Le brouillon s'enregistre tout seul sur ce téléphone.</p>
 
 <form id="fiche" novalidate autocomplete="off">
 
 <fieldset class="carte">
-  <legend>1. Commerce</legend>
+  <legend>L'essentiel</legend>
   <label for="nom">Nom du commerce *</label>
   <input type="text" id="nom" name="nom" required>
   <p class="erreur" id="err-nom" hidden>Le nom du commerce est obligatoire.</p>
@@ -35,14 +36,51 @@
     <input type="text" id="metier_autre" name="metier_autre" placeholder="Précisez le métier" aria-label="Autre métier" hidden style="margin-top:8px">
   </div>
 
+  <label for="tel">Téléphone du commerce *</label>
+  <input type="tel" id="tel" name="tel" inputmode="tel" required>
+  <p class="erreur" id="err-tel" hidden>Le téléphone du commerce est obligatoire.</p>
+
+  <label>Intérêt</label>
+  <div class="choix">
+    <label><input type="radio" name="interet" value="Chaud"> Chaud</label>
+    <label><input type="radio" name="interet" value="Tiède"> Tiède</label>
+    <label><input type="radio" name="interet" value="Froid"> Froid</label>
+  </div>
+  <label>Forfait envisagé</label>
+  <div class="choix">
+    <label><input type="radio" name="forfait" value="Essentiel"> Essentiel · 249 $</label>
+    <label><input type="radio" name="forfait" value="Pro"> Pro · 399 $</label>
+    <label><input type="radio" name="forfait" value="Complet"> Complet · 499 $</label>
+    <label><input type="radio" name="forfait" value="Ne sait pas encore"> Ne sait pas encore</label>
+  </div>
+  <label for="prix_depart">Prix de départ que tu proposes ($)</label>
+  <input type="number" id="prix_depart" name="prix_depart" min="0" step="1" inputmode="numeric">
+  <label for="prix_mois">Prix par mois que tu penses pouvoir demander ($)</label>
+  <input type="number" id="prix_mois" name="prix_mois" min="0" step="1" inputmode="numeric">
+  <p class="aide">Ton estimation nous aide à fixer la grille de prix.</p>
+  <label for="lien_medias">Lien vers les photos et vidéos (WeTransfer, Google Drive…)</label>
+  <input type="text" id="lien_medias" name="lien_medias" inputmode="url">
+  <p class="aide">N'envoie jamais les fichiers dans la fiche : seulement le lien.</p>
+  <div class="carte manque" id="manque" style="margin:16px 0 0">
+    <label for="ce_qui_manque" style="margin-top:0;font-size:20px;font-weight:900;color:var(--accent)">Ce qui manque</label>
+    <p class="aide">Ce que le commerçant a demandé et qu'on n'offre pas.</p>
+    <textarea id="ce_qui_manque" name="ce_qui_manque"></textarea>
+  </div>
+  <label for="notes">Notes libres</label>
+  <textarea id="notes" name="notes"></textarea>
+  <div class="choix" style="margin-top:16px">
+    <label><input type="checkbox" name="recontact" value="oui"> Le commerçant accepte d'être recontacté</label>
+  </div>
+</fieldset>
+
+<details class="carte" id="plus" style="padding:16px">
+  <summary style="font-weight:800;cursor:pointer">Plus de détails (facultatif) : on retrouve la plupart de ces infos nous-mêmes</summary>
+  <fieldset class="carte">
+    <legend>Commerce</legend>
   <label for="adresse">Adresse</label>
   <input type="text" id="adresse" name="adresse" autocomplete="street-address">
   <label for="quartier">Quartier</label>
   <input type="text" id="quartier" name="quartier">
-
-  <label for="tel">Téléphone du commerce *</label>
-  <input type="tel" id="tel" name="tel" inputmode="tel" required>
-  <p class="erreur" id="err-tel" hidden>Le téléphone du commerce est obligatoire.</p>
 
   <label for="courriel">Courriel du commerce</label>
   <input type="email" id="courriel" name="courriel" inputmode="email">
@@ -64,9 +102,8 @@
   </div>
   <input type="text" id="langue_autre" name="langue_autre" placeholder="Autre langue (précisez)" aria-label="Autre langue" style="margin-top:8px">
 </fieldset>
-
-<fieldset class="carte">
-  <legend>2. Responsable</legend>
+  <fieldset class="carte">
+  <legend>Responsable</legend>
   <p class="aide">Demande la permission avant de noter des coordonnées personnelles (Loi 25).</p>
   <label for="resp_nom">Nom</label>
   <input type="text" id="resp_nom" name="resp_nom">
@@ -79,34 +116,28 @@
 </fieldset>
 
 <fieldset class="carte">
-  <legend>3. Services</legend>
+  <legend>Services</legend>
   <p class="aide">Les 5 à 10 services les plus demandés. Prix « à partir de ».</p>
   <div id="services"></div>
   <button type="button" class="btn clair" id="ajout-service">+ Ajouter un service</button>
 </fieldset>
 
 <fieldset class="carte">
-  <legend>4. Horaires</legend>
+  <legend>Horaires</legend>
   <div id="horaires"></div>
 </fieldset>
 
 <fieldset class="carte">
-  <legend>5. Avis Google</legend>
+  <legend>Avis Google</legend>
   <label for="note">Note sur 5</label>
   <input type="number" id="note" name="note" min="0" max="5" step="0.1" inputmode="decimal">
   <label for="nb_avis">Nombre d'avis</label>
   <input type="number" id="nb_avis" name="nb_avis" min="0" step="1" inputmode="numeric">
 </fieldset>
 
-<fieldset class="carte">
-  <legend>6. Ce qu'il veut</legend>
-  <label>Forfait envisagé</label>
-  <div class="choix">
-    <label><input type="radio" name="forfait" value="Essentiel"> Essentiel</label>
-    <label><input type="radio" name="forfait" value="Pro"> Pro</label>
-    <label><input type="radio" name="forfait" value="Complet"> Complet</label>
-    <label><input type="radio" name="forfait" value="Ne sait pas encore"> Ne sait pas encore</label>
-  </div>
+
+  <fieldset class="carte">
+    <legend>Ce qu'il veut</legend>
   <label>Options</label>
   <div class="choix">
     <label><input type="checkbox" name="option" value="Prise de rendez-vous en ligne"> Prise de rendez-vous en ligne</label>
@@ -124,20 +155,10 @@
     <label><input type="radio" name="haut" value="H5"><span>H5 · Photo + « On vous rappelle »<small>Une photo et un petit formulaire : le client laisse son numéro.</small></span></label>
     <label><input type="radio" name="haut" value="Pas d'avis"><span>Pas d'avis<small>Le commerçant n'a pas de préférence.</small></span></label>
   </div>
-  <label>Intérêt</label>
-  <div class="choix">
-    <label><input type="radio" name="interet" value="Chaud"> Chaud</label>
-    <label><input type="radio" name="interet" value="Tiède"> Tiède</label>
-    <label><input type="radio" name="interet" value="Froid"> Froid</label>
-  </div>
-</fieldset>
 
-<fieldset class="carte">
-  <legend>7. Prix</legend>
-  <label for="prix_depart">Prix de départ que tu penses pouvoir demander ($)</label>
-  <input type="number" id="prix_depart" name="prix_depart" min="0" step="1" inputmode="numeric">
-  <label for="prix_mois">Prix par mois que tu penses pouvoir demander ($)</label>
-  <input type="number" id="prix_mois" name="prix_mois" min="0" step="1" inputmode="numeric">
+  </fieldset>
+  <fieldset class="carte">
+    <legend>Prix et réaction</legend>
   <label for="budget">Budget évoqué par le commerçant</label>
   <input type="text" id="budget" name="budget">
   <label>Réaction au prix</label>
@@ -147,11 +168,9 @@
     <label><input type="radio" name="reaction_prix" value="Pas intéressé"> Pas intéressé</label>
     <label><input type="radio" name="reaction_prix" value="Pas encore parlé du prix"> Pas encore parlé du prix</label>
   </div>
-  <p class="aide">Ton estimation nous aide à fixer la grille de prix.</p>
-</fieldset>
-
-<fieldset class="carte">
-  <legend>8. Matériel</legend>
+  </fieldset>
+  <fieldset class="carte">
+    <legend>Matériel</legend>
   <label>Logo</label>
   <div class="choix">
     <label><input type="radio" name="logo" value="Fichier reçu"> Fichier reçu</label>
@@ -168,24 +187,8 @@
     <label><input type="radio" name="video" value="Prise"> Prise</label>
     <label><input type="radio" name="video" value="À prendre"> À prendre</label>
   </div>
-  <label for="lien_medias">Lien vers les photos et vidéos (WeTransfer, Google Drive…)</label>
-  <input type="text" id="lien_medias" name="lien_medias" inputmode="url">
-  <p class="aide">N'envoie jamais les fichiers dans la fiche : seulement le lien.</p>
-</fieldset>
-
-<fieldset class="carte">
-  <legend>9. Notes</legend>
-  <label for="notes">Notes libres</label>
-  <textarea id="notes" name="notes"></textarea>
-  <div class="carte manque" id="manque" style="margin:16px 0 0">
-    <label for="ce_qui_manque" style="margin-top:0;font-size:20px;font-weight:900;color:var(--accent)">Ce qui manque</label>
-    <p class="aide">Ce que le commerçant a demandé et qu'on n'offre pas.</p>
-    <textarea id="ce_qui_manque" name="ce_qui_manque"></textarea>
-  </div>
-  <div class="choix" style="margin-top:16px">
-    <label><input type="checkbox" name="recontact" value="oui"> Le commerçant accepte d'être recontacté</label>
-  </div>
-</fieldset>
+  </fieldset>
+</details>
 
 <p class="aide" style="margin-bottom:8px">Rien n'est envoyé automatiquement : c'est toi qui partages la fiche (WhatsApp, texto, courriel).</p>
 <p class="statut" id="statut" role="status" aria-live="polite"></p>
