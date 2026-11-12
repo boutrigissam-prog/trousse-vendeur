@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Fiche terrain · Sites web pour commerces de service · Montréal</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="pg fiche">
+<div class="badge-ligne"><span class="badge">Version d'essai · 13 novembre 2026</span></div>
+<nav class="barre-site" aria-label="Navigation"><a href="index.html">Guide</a><a href="exemples.html">Exemples</a><a href="fiche.html" aria-current="page">Fiche</a></nav>
+<main class="contenu">
+<h1>Fiche terrain</h1>
+<p class="lead">À remplir pendant ou après la visite. Les champs avec * sont obligatoires. Le brouillon s'enregistre tout seul sur ce téléphone.</p>
+
+<form id="fiche" novalidate autocomplete="off">
+
+<fieldset class="carte">
+  <legend>1. Commerce</legend>
+  <label for="nom">Nom du commerce *</label>
+  <input type="text" id="nom" name="nom" required>
+  <p class="erreur" id="err-nom" hidden>Le nom du commerce est obligatoire.</p>
+
+  <label for="famille">Famille de métier *</label>
+  <select id="famille" name="famille" required>
+    <option value="">Choisir…</option>
+  </select>
+  <p class="erreur" id="err-famille" hidden>Choisis une famille de métier.</p>
+  <input type="text" id="famille_autre" name="famille_autre" placeholder="Précisez la famille" aria-label="Autre famille" hidden style="margin-top:8px">
+
+  <div id="bloc-metier">
+    <label for="metier">Métier précis</label>
+    <select id="metier" name="metier"><option value="">Choisis d'abord une famille</option></select>
+    <input type="text" id="metier_autre" name="metier_autre" placeholder="Précisez le métier" aria-label="Autre métier" hidden style="margin-top:8px">
+  </div>
+
+  <label for="adresse">Adresse</label>
+  <input type="text" id="adresse" name="adresse" autocomplete="street-address">
+  <label for="quartier">Quartier</label>
+  <input type="text" id="quartier" name="quartier">
+
+  <label for="tel">Téléphone du commerce *</label>
+  <input type="tel" id="tel" name="tel" inputmode="tel" required>
+  <p class="erreur" id="err-tel" hidden>Le téléphone du commerce est obligatoire.</p>
+
+  <label for="courriel">Courriel du commerce</label>
+  <input type="email" id="courriel" name="courriel" inputmode="email">
+
+  <label for="site">Site actuel</label>
+  <input type="text" id="site" name="site" inputmode="url">
+  <label for="facebook">Facebook</label>
+  <input type="text" id="facebook" name="facebook">
+  <label for="instagram">Instagram</label>
+  <input type="text" id="instagram" name="instagram">
+  <label for="google">Fiche Google</label>
+  <input type="text" id="google" name="google">
+
+  <label>Langues parlées avec les clients</label>
+  <div class="choix">
+    <label><input type="checkbox" name="langue" value="Français"> Français</label>
+    <label><input type="checkbox" name="langue" value="Anglais"> Anglais</label>
+    <label><input type="checkbox" name="langue" value="Autre"> Autre</label>
+  </div>
+  <input type="text" id="langue_autre" name="langue_autre" placeholder="Autre langue (précisez)" aria-label="Autre langue" style="margin-top:8px">
+</fieldset>
+
+<fieldset class="carte">
+  <legend>2. Responsable</legend>
+  <p class="aide">Demande la permission avant de noter des coordonnées personnelles (Loi 25).</p>
+  <label for="resp_nom">Nom</label>
+  <input type="text" id="resp_nom" name="resp_nom">
+  <label for="resp_role">Rôle</label>
+  <input type="text" id="resp_role" name="resp_role" placeholder="Propriétaire, gérant…">
+  <label for="resp_courriel">Courriel</label>
+  <input type="email" id="resp_courriel" name="resp_courriel" inputmode="email">
+  <label for="resp_cell">Cellulaire</label>
+  <input type="tel" id="resp_cell" name="resp_cell" inputmode="tel">
+</fieldset>
+
+<fieldset class="carte">
+  <legend>3. Services</legend>
+  <p class="aide">Les 5 à 10 services les plus demandés. Prix « à partir de ».</p>
+  <div id="services"></div>
+  <button type="button" class="btn clair" id="ajout-service">+ Ajouter un service</button>
+</fieldset>
+
+<fieldset class="carte">
+  <legend>4. Horaires</legend>
+  <div id="horaires"></div>
+</fieldset>
+
+<fieldset class="carte">
+  <legend>5. Avis Google</legend>
+  <label for="note">Note sur 5</label>
+  <input type="number" id="note" name="note" min="0" max="5" step="0.1" inputmode="decimal">
+  <label for="nb_avis">Nombre d'avis</label>
+  <input type="number" id="nb_avis" name="nb_avis" min="0" step="1" inputmode="numeric">
+</fieldset>
+
+<fieldset class="carte">
+  <legend>6. Ce qu'il veut</legend>
+  <label>Forfait envisagé</label>
+  <div class="choix">
+    <label><input type="radio" name="forfait" value="Essentiel"> Essentiel</label>
+    <label><input type="radio" name="forfait" value="Pro"> Pro</label>
+    <label><input type="radio" name="forfait" value="Complet"> Complet</label>
+    <label><input type="radio" name="forfait" value="Ne sait pas encore"> Ne sait pas encore</label>
+  </div>
+  <label>Options</label>
+  <div class="choix">
+    <label><input type="checkbox" name="option" value="Prise de rendez-vous en ligne"> Prise de rendez-vous en ligne</label>
+    <label><input type="checkbox" name="option" value="Catalogue de services"> Catalogue de services</label>
+    <label><input type="checkbox" name="option" value="Réalisations"> Réalisations</label>
+    <label><input type="checkbox" name="option" value="Conseils chaque mois"> Conseils chaque mois</label>
+    <label><input type="checkbox" name="option" value="Réseaux sociaux"> Réseaux sociaux</label>
+    <label><input type="checkbox" name="option" value="Courriels aux clients"> Courriels aux clients</label>
+    <label><input type="checkbox" name="option" value="Vidéo"> Vidéo</label>
+  </div>
+  <label>Haut de page préféré</label>
+  <div class="choix bloc">
+    <label><input type="radio" name="haut" value="H2"><span>H2 · Photo + note Google + 2 boutons<small>Une grande photo, la note Google et deux boutons : rendez-vous et appeler.</small></span></label>
+    <label><input type="radio" name="haut" value="H3"><span>H3 · Gros titre<small>Un grand titre qui frappe, avec la photo en dessous.</small></span></label>
+    <label><input type="radio" name="haut" value="H5"><span>H5 · Photo + « On vous rappelle »<small>Une photo et un petit formulaire : le client laisse son numéro.</small></span></label>
+    <label><input type="radio" name="haut" value="Pas d'avis"><span>Pas d'avis<small>Le commerçant n'a pas de préférence.</small></span></label>
+  </div>
+  <label>Intérêt</label>
+  <div class="choix">
+    <label><input type="radio" name="interet" value="Chaud"> Chaud</label>
+    <label><input type="radio" name="interet" value="Tiède"> Tiède</label>
+    <label><input type="radio" name="interet" value="Froid"> Froid</label>
+  </div>
+</fieldset>
+
+<fieldset class="carte">
+  <legend>7. Prix</legend>
+  <label for="prix_depart">Prix de départ que tu penses pouvoir demander ($)</label>
+  <input type="number" id="prix_depart" name="prix_depart" min="0" step="1" inputmode="numeric">
+  <label for="prix_mois">Prix par mois que tu penses pouvoir demander ($)</label>
+  <input type="number" id="prix_mois" name="prix_mois" min="0" step="1" inputmode="numeric">
+  <label for="budget">Budget évoqué par le commerçant</label>
+  <input type="text" id="budget" name="budget">
+  <label>Réaction au prix</label>
+  <div class="choix">
+    <label><input type="radio" name="reaction_prix" value="Prêt à signer"> Prêt à signer</label>
+    <label><input type="radio" name="reaction_prix" value="Intéressé mais trouve cher"> Intéressé mais trouve cher</label>
+    <label><input type="radio" name="reaction_prix" value="Pas intéressé"> Pas intéressé</label>
+    <label><input type="radio" name="reaction_prix" value="Pas encore parlé du prix"> Pas encore parlé du prix</label>
+  </div>
+  <p class="aide">Ton estimation nous aide à fixer la grille de prix.</p>
+</fieldset>
+
+<fieldset class="carte">
+  <legend>8. Matériel</legend>
+  <label>Logo</label>
+  <div class="choix">
+    <label><input type="radio" name="logo" value="Fichier reçu"> Fichier reçu</label>
+    <label><input type="radio" name="logo" value="À récupérer"> À récupérer</label>
+    <label><input type="radio" name="logo" value="Pas de logo"> Pas de logo</label>
+  </div>
+  <label>Photos</label>
+  <div class="choix">
+    <label><input type="radio" name="photos" value="Prises"> Prises</label>
+    <label><input type="radio" name="photos" value="À prendre"> À prendre</label>
+  </div>
+  <label>Vidéo</label>
+  <div class="choix">
+    <label><input type="radio" name="video" value="Prise"> Prise</label>
+    <label><input type="radio" name="video" value="À prendre"> À prendre</label>
+  </div>
+  <label for="lien_medias">Lien vers les photos et vidéos (WeTransfer, Google Drive…)</label>
+  <input type="text" id="lien_medias" name="lien_medias" inputmode="url">
+  <p class="aide">N'envoie jamais les fichiers dans la fiche : seulement le lien.</p>
+</fieldset>
+
+<fieldset class="carte">
+  <legend>9. Notes</legend>
+  <label for="notes">Notes libres</label>
+  <textarea id="notes" name="notes"></textarea>
+  <div class="carte manque" id="manque" style="margin:16px 0 0">
+    <label for="ce_qui_manque" style="margin-top:0;font-size:20px;font-weight:900;color:var(--accent)">Ce qui manque</label>
+    <p class="aide">Ce que le commerçant a demandé et qu'on n'offre pas.</p>
+    <textarea id="ce_qui_manque" name="ce_qui_manque"></textarea>
+  </div>
+  <div class="choix" style="margin-top:16px">
+    <label><input type="checkbox" name="recontact" value="oui"> Le commerçant accepte d'être recontacté</label>
+  </div>
+</fieldset>
+
+<p class="aide" style="margin-bottom:8px">Rien n'est envoyé automatiquement : c'est toi qui partages la fiche (WhatsApp, texto, courriel).</p>
+<p class="statut" id="statut" role="status" aria-live="polite"></p>
+</form>
+</main>
+
+<div class="barre-actions">
+  <button type="button" class="btn" id="partager">Partager la fiche</button>
+  <button type="button" class="btn sec" id="copier">Copier</button>
+  <button type="button" class="btn sec" id="telecharger">Télécharger (.txt)</button>
+  <button type="button" class="btn danger" id="nouvelle">Nouvelle fiche</button>
+</div>
+<script src="fiche.js"></script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Exemple de site pour un garage à Brossard : services, prix affichés et rendez-vous.">
+<title>Garage Mistral · Garage à Brossard (exemple)</title>
+<style>
+@font-face{font-family:"Barlow Condensed";src:url(../fonts/barlow-condensed-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Barlow Condensed";src:url(../fonts/barlow-condensed-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"Barlow";src:url(../fonts/barlow-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Barlow";src:url(../fonts/barlow-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Barlow";src:url(../fonts/barlow-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:#fff;color:#1a1a1a;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.kit{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:#ecebe7;color:#55555a;font:500 13px/1.3 system-ui,sans-serif;padding:0 16px;border-bottom:1px solid #d6d4cc}
+.kit a{display:inline-flex;align-items:center;min-height:44px;color:#1a1a1a;font-weight:600;text-decoration:none}
+.kit a:hover{text-decoration:underline}
+.site{container-type:inline-size;overflow-x:clip}
+.site a{color:inherit;text-decoration:none}
+.site img{display:block;max-width:100%}
+.s-wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.s-sec{background:var(--bg);color:var(--txt);padding:56px 0}
+.s-sec h2{margin-bottom:10px}
+.s-lead{color:var(--mut);max-width:38em;margin-bottom:28px}
+.s-grid{display:grid;gap:14px}
+.s-card{background:var(--card);border:1px solid var(--line);padding:20px}
+.s-card h3{margin-bottom:6px}
+.s-card p{color:var(--mut)}
+.s-ico{width:48px;height:48px;display:grid;place-items:center;margin-bottom:14px}
+.s-ico svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.s-prix{display:block;margin:8px 0 6px;line-height:1}
+.s-prix small{font-size:.4em;font-weight:600;margin-right:.3em;letter-spacing:.02em}
+.s-fine{margin-top:18px;color:var(--mut);font-size:14px}
+.s-etapes{counter-reset:e}
+.s-etape{position:relative;padding-top:6px}
+.s-etape::before{counter-increment:e;content:counter(e);display:grid;place-items:center;width:44px;height:44px;margin-bottom:12px;font-weight:800}
+.s-tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;margin-bottom:12px}
+.s-etoiles{letter-spacing:2px;margin-bottom:8px}
+.s-quote{color:var(--txt)!important;margin-bottom:12px}
+.s-auteur{font-weight:600;font-size:15px}
+.s-pastille{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;padding:6px 12px;margin-bottom:16px}
+.s-pastille i{width:9px;height:9px;border-radius:50%;background:currentColor}
+.s-horaires{list-style:none;padding:0;margin:0 0 18px}
+.s-horaires li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.s-horaires li.auj{font-weight:700}
+.s-adresse{margin-bottom:18px;color:var(--mut)}
+.s-carte{position:relative;min-height:280px;display:grid;place-items:center;text-align:center;padding:20px;border:1px solid var(--line);background:
+ linear-gradient(var(--line) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/44px 44px,var(--card)}
+.s-carte-in{display:grid;gap:12px;justify-items:center;background:var(--card);padding:18px 20px;border:1px solid var(--line)}
+.s-carte-in b{font-size:14px;color:var(--mut);font-weight:600}
+.s-faq details{border-bottom:1px solid var(--line)}
+.s-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:56px;padding:12px 0;font-weight:600;font-size:18px}
+.s-faq summary::-webkit-details-marker{display:none}
+.s-faq summary::after{content:"+";font-size:26px;line-height:1;flex:none;width:44px;text-align:center}
+.s-faq details[open] summary::after{content:"\2212"}
+.s-faq p{padding:0 44px 18px 0;color:var(--mut);max-width:44em}
+.s-cta{padding:64px 0;text-align:center}
+.s-cta .s-wrap{display:grid;gap:18px;justify-items:center}
+.s-cta p{max-width:32em}
+.s-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.s-foot{background:var(--foot);color:#c9ced3;padding:48px 0 110px;font-size:15px}
+.s-foot .s-wrap{display:grid;gap:28px}
+.s-foot h4{color:#fff;margin-bottom:10px;font-size:14px;letter-spacing:.1em;text-transform:uppercase}
+.s-foot p,.s-foot li{margin-bottom:4px}
+.s-foot ul{list-style:none;padding:0}
+.s-foot a{display:inline-flex;align-items:center;min-height:44px}
+.s-foot a:hover{text-decoration:underline}
+.s-foot .s-bas{display:flex;flex-wrap:wrap;gap:4px 20px;justify-content:space-between;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;font-size:13px}
+.s-barre{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:var(--barre);box-shadow:0 -6px 20px rgba(0,0,0,.18)}
+.s-barre .btn{width:100%}
+.toast{position:fixed;left:50%;bottom:84px;transform:translate(-50%,12px);z-index:40;max-width:calc(100vw - 32px);background:#101418;color:#fff;font:600 15px/1.35 system-ui,sans-serif;padding:12px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.site :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.js-rv .rv{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+.js-rv .rv.vu{opacity:1;transform:none}
+.titre-anim span{display:inline-block;opacity:0;transform:translateY(.35em);animation:mot .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0) * 75ms + 200ms)}
+@keyframes mot{to{opacity:1;transform:none}}
+.anim-fin .titre-anim span{opacity:1;transform:none;animation:none}
+.photo-anim{animation:pose 2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes pose{from{transform:scale(1.08)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.titre-anim span{opacity:1;transform:none;animation:none}.photo-anim{animation:none}.js-rv .rv{opacity:1;transform:none;transition:none}.toast{transition:none}}
+@container (min-width:600px){.g-serv,.g-prix{grid-template-columns:repeat(2,1fr)}}
+@container (min-width:700px){
+ .s-wrap{padding:0 48px}.s-sec{padding:88px 0}
+ .g-etapes,.g-avis{grid-template-columns:repeat(3,1fr);gap:24px}
+ .s-foot .s-wrap{grid-template-columns:1.3fr 1fr 1fr}
+ .s-foot{padding-bottom:48px}
+ .s-barre{display:none}
+ .toast{bottom:28px}
+ .g-hor{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+ .s-carte{min-height:360px}
+}
+@container (min-width:960px){.g-serv{grid-template-columns:repeat(3,1fr)}.g-prix{grid-template-columns:repeat(4,1fr)}}
+
+
+.d-atelier{--fond:#15181b;--clair:#f2f0eb;--accent:#f76707;--gris:#9aa3ab;--bg:#15181b;--txt:#f2f0eb;--mut:#b4bcc3;--card:#1e2327;--line:#2f353b;--foot:#0e1113;--barre:#15181b;--focus:#f76707;font-family:"Barlow",sans-serif;color:var(--clair);background:var(--fond)}
+.d-atelier .s-sec.alt{--bg:#f2f0eb;--txt:#15181b;--mut:#4d555c;--card:#fff;--line:#d6d2c9;--focus:#15181b}
+.d-atelier .s-sec h2{font:800 clamp(34px,9cqi,52px)/.95 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.01em;padding-top:14px;border-top:4px solid var(--accent);display:table;margin-bottom:14px}
+.d-atelier .s-card{border-radius:2px;border-top:3px solid var(--accent)}
+.d-atelier .s-card h3,.d-atelier .s-etape h3{font:700 24px/1.05 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.03em}
+.d-atelier .s-ico{background:#15181b;color:var(--accent);border-radius:2px}
+.d-atelier .s-prix{font:800 52px/1 "Barlow Condensed",sans-serif;color:var(--txt)}
+.d-atelier .s-prix small{font-family:"Barlow",sans-serif;text-transform:uppercase;font-size:14px;color:var(--mut)}
+.d-atelier .s-etape{border-left:3px solid var(--accent);padding:0 0 0 18px}
+.d-atelier .s-etape::before{background:var(--accent);color:#15181b;font:800 26px "Barlow Condensed",sans-serif;border-radius:2px}
+.d-atelier .s-etape p{color:var(--mut)}
+.d-atelier .s-tag{background:#15181b;color:#f2f0eb;border-radius:2px}
+.d-atelier .s-etoiles{color:var(--accent)}
+.d-atelier .alt .s-etoiles{color:#c24d00}
+.d-atelier .s-pastille{border-radius:2px;background:#15181b;color:#f2f0eb}
+.d-atelier .s-pastille.ouvert i{background:#4ade80}.d-atelier .s-pastille.ferme i{background:#f87171}
+.d-atelier .s-carte,.d-atelier .s-carte-in{border-radius:2px}
+.d-atelier .s-faq summary{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.d-atelier .s-faq summary::after{color:var(--accent)}
+.d-atelier .s-cta{background:var(--accent);color:#15181b}
+.d-atelier .s-cta h2{font:800 clamp(38px,10cqi,64px)/.95 "Barlow Condensed",sans-serif;text-transform:uppercase}
+.d-atelier .s-cta :focus-visible{outline-color:#15181b}
+.d-atelier .btn{display:inline-flex;justify-content:center;align-items:center;min-height:44px;cursor:pointer;background:var(--accent);color:var(--fond);font:700 14px/1 "Barlow",sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:13px 18px;border-radius:2px;border:0}
+.d-atelier .btn.ghost{background:transparent;color:var(--txt);box-shadow:inset 0 0 0 1.5px currentColor}
+.d-atelier .s-barre .btn.ghost{color:#f2f0eb}
+.d-atelier .s-cta .btn{background:#15181b;color:#f2f0eb}
+.d-atelier .s-cta .btn.ghost{background:transparent;color:#15181b;box-shadow:inset 0 0 0 2px #15181b}
+.d-atelier .s-bandeau{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px;background:var(--accent);color:var(--fond);font:600 13px/1.3 "Barlow",sans-serif;padding:8px 20px}
+.d-atelier .s-bandeau a{display:inline-flex;align-items:center;min-height:28px;font-weight:700}
+.d-atelier .s-head{display:flex;align-items:center;gap:20px;padding:14px 20px;border-bottom:1px solid #2b3036}
+.at-logo{display:grid;line-height:1}
+.at-logo b{font:800 26px/1 "Barlow Condensed",sans-serif;letter-spacing:.06em}
+.at-logo span{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gris);margin-top:4px}
+.d-atelier .s-nav{display:none;gap:6px;margin-left:auto;font:600 13px "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#c9ced3}
+.d-atelier .s-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px}
+.d-atelier .s-head .btn{margin-left:auto;padding:11px 14px}
+.d-atelier .lg{opacity:.75}
+@container (min-width:700px){
+ .d-atelier .s-bandeau,.d-atelier .s-head{padding-left:48px;padding-right:48px}
+ .d-atelier .s-nav{display:flex}.d-atelier .s-head .btn{margin-left:0}
+}
+
+
+.at-hero{position:relative;overflow:hidden;min-height:700px;display:grid}
+.at-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% center}
+.at-voile{position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,24,27,.25) 0%,rgba(21,24,27,.82) 40%,rgba(21,24,27,.96) 100%)}
+.at-contenu{position:relative;display:grid;gap:28px;align-content:end;padding:150px 20px 28px}
+.at-sur{color:var(--accent);font:600 12px "Barlow",sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.d-atelier h1{font:800 13.5cqi/.9 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:-.005em;margin:.25em 0 .3em}
+.at-sous{color:#c9ced3;font-size:17px;max-width:30em}
+.at-note{display:inline-flex;gap:8px;align-items:center;margin-top:16px;padding:8px 12px;border:1px solid rgba(242,240,235,.18);background:rgba(242,240,235,.06);font:600 14px "Barlow",sans-serif}
+.at-note .etoiles{color:var(--accent);letter-spacing:2px}
+.at-rappel{background:var(--clair);color:var(--fond);padding:20px;border-top:4px solid var(--accent);border-radius:2px;display:grid;gap:12px}
+.at-rappel-titre{font:700 24px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.at-rappel label{font:600 12px "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#5b636b}
+.at-rappel input,.at-rappel select{display:block;width:100%;margin-top:6px;height:46px;border:1.5px solid #c9c4ba;background:#fff;border-radius:2px;padding:0 12px;font:500 16px "Barlow",sans-serif;color:var(--fond)}
+.at-rappel .btn{width:100%;padding:15px}
+.at-petit{font-size:13px;color:#5b636b}
+@container (min-width:700px){
+  .at-hero{min-height:600px}
+  .at-voile{background:linear-gradient(90deg,rgba(21,24,27,.94) 0%,rgba(21,24,27,.78) 42%,rgba(21,24,27,.2) 100%)}
+  .at-contenu{grid-template-columns:1.3fr minmax(280px,.8fr);align-items:end;gap:56px;padding:72px 48px 56px}
+  .d-atelier h1{font-size:7.4cqi}
+}
+
+</style>
+</head>
+<body>
+
+<div class="kit"><a href="../exemples.html">← Exemples</a><span>Exemple fictif : ce commerce n'existe pas</span></div>
+<div class="site d-atelier">
+<div class="s-bandeau"><span data-auj>Lun.-ven. · 7 h 30 – 18 h</span><a href="tel:450-555-0142">450 555-0142</a></div>
+<header class="s-head"><a class="at-logo" href="#"><b>MISTRAL</b><span>Garage · Brossard</span></a><nav class="s-nav" aria-label="Navigation"><a href="#services">Services</a><a href="#prix">Prix</a><a href="#avis">Avis</a><a href="#contact">Contact</a><a class="lg" href="#" data-demo="Exemple : la version anglaise n'existe pas dans cette démo.">EN</a></nav><button class="btn" type="button" data-demo="Exemple : la prise de rendez-vous n'est pas branchée.">Prendre RDV</button></header>
+<section class="at-hero">
+    <img class="at-photo photo-anim" src="img/garage-hero.jpg" alt="Mécanicien au travail sous un capot">
+    <div class="at-voile"></div>
+    <div class="at-contenu">
+      <div>
+        <p class="at-sur">Mécanique · Freins · Pneus · Diagnostic</p>
+        <h1 class="titre-anim"><span>Votre</span> <span>auto</span> <span>entre</span> <span>de</span> <span>bonnes</span> <span>mains.</span></h1>
+        <p class="at-sous">Le prix est affiché avant les travaux. Pièces et main-d'œuvre garanties 12 mois.</p>
+        <p class="at-note"><span class="etoiles">★★★★★</span> 4,8 · 212 avis Google</p>
+      </div>
+      <form class="at-rappel" onsubmit="return false">
+        <p class="at-rappel-titre">On vous rappelle</p>
+        <label>Nom<input placeholder="Votre nom" autocomplete="off"></label>
+        <label>Téléphone<input placeholder="450 …" inputmode="tel" autocomplete="off"></label>
+        <label>Pour quoi ?<select><option>Entretien</option><option>Freins</option><option>Pneus</option><option>Bruit ou voyant allumé</option></select></label>
+        <button class="btn" type="button" data-demo="Exemple : ce formulaire n'envoie rien.">Rappelez-moi</button>
+        <p class="at-petit">Réponse le jour même, du lundi au samedi.</p>
+      </form>
+    </div>
+  </section>
+<section class="s-sec alt" id="services"><div class="s-wrap"><h2 class="rv">Nos services</h2><p class="s-lead rv">De l'entretien courant au diagnostic, tout se fait au même endroit.</p><div class="s-grid g-serv"><div class="s-card rv"><span class="s-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></svg></span><h3>Entretien et vidange</h3><p>Huile, filtres et inspection complète de votre véhicule.</p></div><div class="s-card rv"><span class="s-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span><h3>Freins</h3><p>Plaquettes, disques et liquide, testés avant de repartir.</p></div><div class="s-card rv"><span class="s-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 3v4.5M12 16.5V21M3 12h4.5M16.5 12H21"/></svg></span><h3>Pneus et alignement</h3><p>Pose, équilibrage et alignement, été comme hiver.</p></div><div class="s-card rv"><span class="s-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M7 11h3l1.5-3 2 6 1.5-3H17M9 21h6M12 17v4"/></svg></span><h3>Diagnostic électronique</h3><p>Voyant allumé ? On lit le code et on vous explique.</p></div><div class="s-card rv"><span class="s-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M9 21h6M12 3v2M12 19v2M8 7l8 2-8 3 8 3-8 2"/></svg></span><h3>Suspension et direction</h3><p>Amortisseurs, rotules et bruits suspects réglés.</p></div><div class="s-card rv"><span class="s-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5 12 6.5l2.5-2M9.5 19.5 12 17.5l2.5 2"/></svg></span><h3>Climatisation</h3><p>Recharge et vérification, pour rouler au frais.</p></div></div></div></section>
+<section class="s-sec" id="prix"><div class="s-wrap"><h2 class="rv">Des prix affichés, sans surprise</h2><p class="s-lead rv">Voici quelques prix de départ. On confirme le montant exact avant de toucher à votre auto.</p><div class="s-grid g-prix"><div class="s-card rv"><p>Vidange d'huile synthétique</p><b class="s-prix"><small>dès</small>79,95 $</b><p>Huile, filtre et vérification des niveaux.</p></div><div class="s-card rv"><p>Pose et équilibrage de 4 pneus</p><b class="s-prix"><small>dès</small>59,95 $</b><p>Pneus d'été ou d'hiver, sur jantes.</p></div><div class="s-card rv"><p>Plaquettes de freins avant</p><b class="s-prix"><small>dès</small>189 $</b><p>Pièces et main-d'œuvre incluses.</p></div><div class="s-card rv"><p>Diagnostic électronique</p><b class="s-prix"><small>dès</small>89 $</b><p>Lecture des codes et rapport clair.</p></div></div><p class="s-fine">Prix d'exemple, taxes en sus.</p></div></section>
+<section class="s-sec alt" id="comment"><div class="s-wrap"><h2 class="rv">Comment ça marche</h2><div class="s-grid g-etapes s-etapes" style="margin-top:24px"><div class="s-etape rv"><h3>Prenez rendez-vous</h3><p>En ligne ou par téléphone, à l'heure qui vous convient.</p></div><div class="s-etape rv"><h3>On vous appelle avec le prix</h3><p>Vous approuvez le montant avant que les travaux commencent.</p></div><div class="s-etape rv"><h3>Vous repartez tranquille</h3><p>Travail garanti 12 mois, pièces et main-d'œuvre.</p></div></div></div></section>
+<section class="s-sec" id="avis"><div class="s-wrap"><h2 class="rv">Ce que disent nos clients</h2><p class="s-lead rv">Trois exemples d'avis, pour montrer la mise en page.</p><div class="s-grid g-avis"><figure class="s-card rv"><span class="s-tag">Avis d'exemple</span><p class="s-etoiles" aria-label="5 étoiles">★★★★★</p><blockquote><p class="s-quote">Prix donné avant les travaux et respecté. Auto prête à l'heure prévue.</p></blockquote><figcaption class="s-auteur">Marc-André T.</figcaption></figure><figure class="s-card rv"><span class="s-tag">Avis d'exemple</span><p class="s-etoiles" aria-label="5 étoiles">★★★★★</p><blockquote><p class="s-quote">Enfin un garage qui explique ce qu'il fait. Je reviens à coup sûr.</p></blockquote><figcaption class="s-auteur">Sophie L.</figcaption></figure><figure class="s-card rv"><span class="s-tag">Avis d'exemple</span><p class="s-etoiles" aria-label="5 étoiles">★★★★★</p><blockquote><p class="s-quote">Pneus d'hiver posés en 45 minutes, accueil très sympathique.</p></blockquote><figcaption class="s-auteur">Karim B.</figcaption></figure></div></div></section>
+<section class="s-sec alt" id="contact"><div class="s-wrap g-hor"><div><h2 class="rv">Nous trouver</h2><p class="s-pastille" data-statut>Horaires</p><ul class="s-horaires"><li data-j="1"><span>Lundi</span><span>7 h 30 – 18 h</span></li><li data-j="2"><span>Mardi</span><span>7 h 30 – 18 h</span></li><li data-j="3"><span>Mercredi</span><span>7 h 30 – 18 h</span></li><li data-j="4"><span>Jeudi</span><span>7 h 30 – 18 h</span></li><li data-j="5"><span>Vendredi</span><span>7 h 30 – 18 h</span></li><li data-j="6"><span>Samedi</span><span>8 h – 14 h</span></li><li data-j="0"><span>Dimanche</span><span>Fermé</span></li></ul><p class="s-adresse">123, rue Exemple, Brossard QC</p><div class="s-actions" style="justify-content:flex-start"><a class="btn" href="tel:450-555-0142">Appeler</a><button class="btn ghost" type="button" data-demo="Exemple : l'itinéraire s'ouvrirait ici.">Itinéraire</button></div></div>
+<div class="s-carte rv" data-carte><div class="s-carte-in"><b>Carte · s'affiche au clic</b><button class="btn" type="button" data-carte-btn>Afficher la carte</button></div></div></div></section>
+<section class="s-sec" id="faq"><div class="s-wrap"><h2 class="rv">Questions fréquentes</h2><div class="s-faq rv" style="margin-top:18px"><details><summary>Quand faut-il poser les pneus d'hiver ?</summary><p>Ils sont obligatoires au Québec du 1er décembre au 15 mars. Prenez rendez-vous dès novembre pour éviter la file.</p></details><details><summary>Faut-il un rendez-vous ?</summary><p>C'est recommandé pour l'entretien et les freins. En cas d'urgence, appelez-nous : on vous trouve une place le jour même si possible.</p></details><details><summary>Est-ce que vous donnez le prix avant ?</summary><p>Oui, toujours. On vous appelle avec le montant et on ne commence rien sans votre accord.</p></details><details><summary>Quelle garantie ?</summary><p>Pièces et main-d'œuvre sont garanties 12 mois sur tous nos travaux.</p></details></div></div></section>
+<section class="s-cta"><div class="s-wrap"><h2 class="rv">Prêt à passer nous voir ?</h2><p class="rv">Un appel, un prix clair, une auto qui roule. On s'occupe du reste.</p><div class="s-actions rv"><button class="btn" type="button" data-demo="Exemple : la prise de rendez-vous n'est pas branchée.">Prendre rendez-vous</button><a class="btn ghost" href="tel:450-555-0142">450 555-0142</a></div></div></section>
+<footer class="s-foot"><div class="s-wrap"><div><h4>Garage Mistral</h4><p>123, rue Exemple, Brossard QC</p><p><a href="tel:450-555-0142">450 555-0142</a></p></div><div><h4>Horaires</h4><p>Lun.-ven. 7 h 30 – 18 h</p><p>Samedi 8 h – 14 h</p><p>Dimanche fermé</p></div><div><h4>Liens</h4><ul><li><a href="#services">Services</a></li><li><a href="#prix">Prix</a></li><li><a href="#faq">Questions fréquentes</a></li></ul></div><div class="s-bas" style="grid-column:1/-1"><span>FR | <a href="#" data-demo="Exemple : la version anglaise n'existe pas dans cette démo.">EN</a> · <a href="#" data-demo="Exemple : la politique de confidentialité s'afficherait ici.">Politique de confidentialité</a></span><span>© Garage Mistral · exemple fictif</span></div></div></footer>
+<div class="s-barre"><a class="btn ghost" href="tel:450-555-0142">Appeler</a><button class="btn" type="button" data-demo="Exemple : la prise de rendez-vous n'est pas branchée.">Prendre RDV</button></div>
+</div>
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+var d=document,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+d.querySelectorAll('.titre-anim span').forEach(function(m,i){m.style.setProperty('--i',i)});setTimeout(function(){document.documentElement.classList.add('anim-fin')},2600);
+var t=d.querySelector('.toast'),tt;
+function toast(m){t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},3200)}
+d.addEventListener('click',function(e){var b=e.target.closest('[data-demo]');if(b){e.preventDefault();toast(b.dataset.demo)}});
+var cb=d.querySelector('[data-carte-btn]');
+if(cb)cb.addEventListener('click',function(){cb.closest('.s-carte-in').innerHTML='<b>Exemple : la carte s\u2019afficherait ici.</b>'});
+var H={0:null,1:[450,1080],2:[450,1080],3:[450,1080],4:[450,1080],5:[450,1080],6:[480,840]};
+function f(m){var h=Math.floor(m/60),n=m%60;return h+' h'+(n?' '+n:'')}
+var n=new Date(),j=n.getDay(),mi=n.getHours()*60+n.getMinutes(),o=H[j],ouvert=!!o&&mi>=o[0]&&mi<o[1];
+var p=d.querySelector('[data-statut]');
+if(p){p.textContent=ouvert?'Ouvert maintenant \u00b7 ferme \u00e0 '+f(o[1]):'Ferm\u00e9 en ce moment';p.classList.add(ouvert?'ouvert':'ferme')}
+var a=d.querySelector('[data-auj]');
+if(a)a.textContent=o?(ouvert?'Ouvert aujourd\u2019hui':'Aujourd\u2019hui')+' \u00b7 '+f(o[0])+' \u2013 '+f(o[1]):'Ferm\u00e9 aujourd\u2019hui';
+var li=d.querySelector('.s-horaires li[data-j="'+j+'"]');if(li)li.classList.add('auj');
+if(!rm&&'IntersectionObserver' in window){
+ d.documentElement.classList.add('js-rv');
+ var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vu');io.unobserve(x.target)}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+ d.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+}
+})();
+</script>
+</body>
+</html>

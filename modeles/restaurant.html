@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Philomène · Bistro de quartier à Brossard (exemple)</title>
+<meta name="description" content="Exemple de site pour un bistro de quartier. Commerce fictif.">
+<style>
+@font-face{font-family:"Fraunces";src:url(../fonts/fraunces-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(../fonts/fraunces-latin-wght-italic.woff2) format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Figtree";src:url(../fonts/figtree-latin-wght-normal.woff2) format("woff2");font-weight:300 900;font-display:swap}
+
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:#f3ece0;font:16px/1.5 system-ui,sans-serif}
+img{max-width:100%}
+
+/* Barre de la trousse (hors site) */
+.trousse{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:0 16px;background:#202124;color:#e6e6e6;font:500 13px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;padding:0 16px}
+.trousse a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+.trousse a:hover{text-decoration:underline}
+
+.site{container-type:inline-size}
+a{color:inherit}
+.photo-anim{animation:pose 2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes pose{from{transform:scale(1.08)}to{transform:scale(1)}}
+.titre-anim span{display:inline-block;opacity:0;transform:translateY(.35em);animation:mot .8s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0) * 75ms + 200ms)}
+@keyframes mot{to{opacity:1;transform:none}}
+.anim-fin .titre-anim span{opacity:1;transform:none;animation:none}
+.js .rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.titre-anim span{opacity:1;transform:none;animation:none}.photo-anim{animation:none}.js .rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* ===== Bistro (planche de style, à l'identique) ===== */
+.d-bistro{--creme:#f3ece0;--encre:#2a2017;--terre:#a8431f;--olive:#3d4a2f;--ligne:#e0d5c3;font-family:"Figtree",sans-serif;color:var(--encre);background:var(--creme)}
+.bi-entete{display:flex;align-items:center;gap:20px;padding:16px 20px}
+.bi-logo{display:grid;line-height:1;text-decoration:none}
+.bi-logo b{font:700 italic 28px/1 "Fraunces",serif;letter-spacing:-.01em}
+.bi-logo small{font:600 10px "Figtree",sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--olive);margin-top:5px}
+.bi-nav{display:none;gap:26px;margin-left:auto;font:500 15px "Figtree",sans-serif}
+.bi-nav a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.bi-btn{display:inline-flex;justify-content:center;align-items:center;min-height:44px;background:var(--terre);color:#fff;font:600 15px/1 "Figtree",sans-serif;padding:15px 22px;border-radius:999px;border:0;cursor:pointer;text-decoration:none}
+.bi-btn.contour{background:transparent;color:var(--encre);box-shadow:inset 0 0 0 1.5px var(--encre)}
+.bi-entete .bi-btn{margin-left:auto;padding:11px 16px;font-size:14px}
+.bi-hero{padding:36px 20px 48px}
+.bi-sur{font:600 12px "Figtree",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--olive)}
+.d-bistro h1{font:600 12cqi/.98 "Fraunces",serif;letter-spacing:-.025em;margin:.35em 0 .45em}
+.d-bistro h1 em{font-style:italic;font-weight:500;color:var(--terre)}
+.bi-ligne{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
+.bi-actions{display:flex;flex-wrap:wrap;gap:10px}
+.bi-note{font:600 14px "Figtree",sans-serif}
+.bi-note b{color:var(--terre);letter-spacing:2px}
+.bi-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:32px;align-items:start}
+.bi-photos img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px}
+.bi-photos img:nth-child(2){margin-top:22px}
+
+/* ===== Sections ===== */
+.bi-sec{padding:56px 20px;scroll-margin-top:0}
+.bi-in{max-width:1100px;margin:0 auto}
+.bi-eyebrow{font:600 12px "Figtree",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--olive)}
+.bi-t{font:600 clamp(34px,9cqi,52px)/1.02 "Fraunces",serif;letter-spacing:-.02em;margin:.25em 0 .6em}
+.bi-t em{font-style:italic;font-weight:500;color:var(--terre)}
+/* menu */
+.bi-onglets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.bi-onglets button{min-height:44px;padding:0 20px;border-radius:999px;border:0;background:transparent;box-shadow:inset 0 0 0 1.5px var(--ligne);font:600 15px "Figtree",sans-serif;color:var(--encre);cursor:pointer}
+.bi-onglets button[aria-selected=true]{background:var(--olive);color:#fff;box-shadow:none}
+.bi-plats{list-style:none;padding:0;display:grid;gap:0 56px}
+.bi-plats[hidden]{display:none}
+.bi-plats li{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:18px 0;border-bottom:1px solid var(--ligne)}
+.bi-plats b{font:600 20px/1.2 "Fraunces",serif}
+.bi-plats .prix{font:700 17px "Figtree",sans-serif;color:var(--terre);white-space:nowrap}
+.bi-plats p{grid-column:1;font-size:15px;color:#5a4d3f;line-height:1.45}
+.bi-note-menu{margin-top:22px;font-size:13px;color:#5a4d3f}
+/* réservation */
+.bi-resa{background:var(--olive);color:var(--creme)}
+.bi-resa .bi-eyebrow{color:#d9d3b4}
+.bi-resa .bi-t em{color:#f0c9a9}
+.bi-resa-form{display:grid;gap:14px;max-width:880px}
+.bi-resa-form label{display:grid;gap:6px;font:600 13px "Figtree",sans-serif;letter-spacing:.04em}
+.bi-resa-form input,.bi-resa-form select{height:50px;border:0;border-radius:12px;padding:0 14px;font:500 16px "Figtree",sans-serif;color:var(--encre);background:#fbf7f0;width:100%}
+.bi-resa-form .bi-btn{background:var(--creme);color:var(--olive);min-height:50px;font-weight:700}
+.bi-resa p.petit{font-size:13px;color:#e4ddc4;margin-top:14px}
+/* à propos */
+.bi-apropos{display:grid;gap:28px;align-items:center}
+.bi-apropos img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:20px;display:block;object-position:50% 30%}
+.bi-apropos p{font-size:17px;line-height:1.65;max-width:34em;margin-bottom:1em}
+.bi-signe{font:italic 500 20px "Fraunces",serif;color:var(--terre)}
+/* horaires + carte */
+.bi-alt{background:#ebe1d0}
+.bi-infos{display:grid;gap:32px}
+.bi-statut{display:inline-flex;align-items:center;gap:8px;font:600 14px "Figtree",sans-serif;padding:8px 14px;border-radius:99px;background:#d8e0c9;color:#2b3a1c;margin-bottom:18px}
+.bi-statut::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.bi-statut.ferme{background:#f1d9cf;color:#7a2c1c}
+.bi-hor{list-style:none;padding:0;max-width:440px}
+.bi-hor li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #d6c9b3;font-size:16px}
+.bi-hor li.auj{font-weight:700}
+.bi-adr{margin-top:18px;line-height:1.65}
+.bi-adr a{font-weight:700}
+.bi-carte{position:relative;min-height:300px;border-radius:20px;background:#e2d6c1;overflow:hidden;display:grid;place-items:center;text-align:center;padding:20px}
+.bi-carte-in{display:grid;gap:12px;justify-items:center}
+.bi-carte small{font:600 12px "Figtree",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#5a4d3f}
+.bi-carte svg{position:absolute;inset:0;width:100%;height:100%;display:none}
+.bi-carte.on svg{display:block}.bi-carte.on .bi-carte-in{display:none}
+.bi-carte-pied{position:absolute;left:12px;right:12px;bottom:12px;background:rgba(243,236,224,.95);border-radius:12px;padding:12px 16px;font-size:14px;text-align:left;display:none;gap:2px}
+.bi-carte.on .bi-carte-pied{display:grid}
+.bi-carte-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+/* pied */
+.bi-pied{background:var(--encre);color:rgba(243,236,224,.85);padding:56px 20px 24px;font-size:15px;line-height:1.7}
+.bi-pied-grille{display:grid;gap:30px;max-width:1100px;margin:0 auto}
+.bi-pied .bi-logo{color:var(--creme);display:inline-grid;margin-bottom:12px}
+.bi-pied .bi-logo small{color:#c9d1ae}
+.bi-pied h4{font:600 12px "Figtree",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#f0c9a9;margin-bottom:10px}
+.bi-pied ul{list-style:none;padding:0}
+.bi-pied a{color:inherit}
+.bi-pied li a,.bi-pied p a{display:inline-flex;align-items:center;min-height:36px}
+.bi-legal{max-width:1100px;margin:30px auto 0;padding-top:12px;border-top:1px solid rgba(243,236,224,.2);display:flex;flex-wrap:wrap;align-items:center;gap:0 24px;font-size:13px}
+.bi-legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px}
+/* barre mobile + toast */
+.bi-barre{display:none}
+.toast{position:fixed;left:50%;bottom:84px;transform:translate(-50%,20px);background:#2a2017;color:#fff;font:600 14px/1.35 "Figtree",system-ui,sans-serif;padding:14px 18px;border-radius:14px;max-width:calc(100vw - 32px);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.3)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@container (max-width:699px){
+  .bi-barre{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--creme);border-top:1px solid var(--ligne);padding:8px 12px calc(8px + env(safe-area-inset-bottom));gap:8px}
+  .bi-barre .bi-btn{min-height:48px}
+  .bi-pied{padding-bottom:96px}
+}
+@container (min-width:700px){
+  .bi-entete{padding:22px 48px}
+  .bi-nav{display:flex}.bi-entete .bi-btn{margin-left:0}
+  .bi-hero{padding:56px 48px 72px}
+  .d-bistro h1{font-size:7.6cqi}
+  .bi-photos{gap:16px;margin-top:48px}
+  .bi-photos img{border-radius:20px}
+  .bi-photos img:nth-child(2){margin-top:40px}
+  .bi-sec{padding:88px 48px}
+  .bi-plats{grid-template-columns:1fr 1fr}
+  .bi-resa-form{grid-template-columns:repeat(3,1fr) auto;align-items:end}
+  .bi-apropos{grid-template-columns:5fr 6fr;gap:72px}
+  .bi-infos{grid-template-columns:1fr 1fr;gap:64px}
+  .bi-pied-grille{grid-template-columns:1.4fr 1fr 1fr}
+  .bi-pied{padding:64px 48px 24px}
+}
+</style>
+</head>
+<body>
+<div class="trousse"><a href="../exemples.html">← Exemples</a><span>Exemple fictif : ce commerce n'existe pas</span></div>
+
+<div class="site">
+<div class="d-bistro">
+  <header class="bi-entete"><a class="bi-logo" href="#haut"><b>Philomène</b><small>Bistro de quartier</small></a><nav class="bi-nav" aria-label="Navigation"><a href="#menu">Menu</a><a href="#reserver">Réserver</a><a href="#infos">Infos</a><a href="#" data-demo="Exemple : les cartes-cadeaux ne sont pas incluses.">Carte-cadeau</a><a href="#" data-demo="Exemple : la version anglaise n'est pas incluse." style="opacity:.75">EN</a></nav><a class="bi-btn" href="#reserver">Réserver</a></header>
+
+  <section class="bi-hero" id="haut">
+    <p class="bi-sur">Brossard · Du mercredi au dimanche</p>
+    <h1 class="titre-anim"><span>Cuisine</span> <span>du</span> <span>marché,</span> <span>vins</span> <span>nature,</span> <em><span>tables</span> <span>de</span> <span>quartier.</span></em></h1>
+    <div class="bi-ligne"><div class="bi-actions"><a class="bi-btn" href="#reserver">Réserver une table</a><a class="bi-btn contour" href="#menu">Voir le menu</a></div><p class="bi-note"><b>★★★★★</b> 4,8 · 290 avis Google</p></div>
+    <div class="bi-photos"><img class="photo-anim" src="img/bistro-1.jpg" alt="Assiette dressée sur une planche de bois"><img class="photo-anim" src="img/bistro-2.jpg" alt="Deux cuisiniers au travail"><img class="photo-anim" src="img/bistro-3.jpg" alt="Salle du bistro avec plantes"></div>
+  </section>
+
+  <section class="bi-sec rv" id="menu"><div class="bi-in">
+    <p class="bi-eyebrow">Le menu</p>
+    <h2 class="bi-t">Ce que le marché <em>nous a donné</em></h2>
+    <div class="bi-onglets" role="tablist" aria-label="Sections du menu" id="onglets">
+      <button type="button" role="tab" aria-selected="true" aria-controls="p0" id="o0">Entrées</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="p1" id="o1" tabindex="-1">Plats</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="p2" id="o2" tabindex="-1">Desserts</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="p3" id="o3" tabindex="-1">Vins</button>
+    </div>
+    <ul class="bi-plats" role="tabpanel" id="p0" aria-labelledby="o0">
+      <li><b>Velouté de panais</b><span class="prix">12 $</span><p>Huile de noisette, croûtons à l'ail.</p></li>
+      <li><b>Tartare de betteraves</b><span class="prix">14 $</span><p>Chèvre frais, graines de tournesol grillées.</p></li>
+      <li><b>Rillettes de truite fumée</b><span class="prix">15 $</span><p>Cornichons maison, pain de campagne.</p></li>
+      <li><b>Salade d'endives</b><span class="prix">13 $</span><p>Pommes, noix, vinaigrette à la moutarde.</p></li>
+      <li><b>Œufs mimosa</b><span class="prix">9 $</span><p>Mayonnaise au citron, ciboulette.</p></li>
+      <li><b>Soupe à l'oignon gratinée</b><span class="prix">14 $</span><p>Fromage de la région, bouillon de bœuf.</p></li>
+    </ul>
+    <ul class="bi-plats" role="tabpanel" id="p1" aria-labelledby="o1" hidden>
+      <li><b>Magret de canard</b><span class="prix">34 $</span><p>Jus aux cerises, purée de céleri-rave.</p></li>
+      <li><b>Gnocchi maison</b><span class="prix">26 $</span><p>Champignons sauvages, parmesan, sauge.</p></li>
+      <li><b>Poisson du jour</b><span class="prix">32 $</span><p>Beurre blanc, légumes racines rôtis.</p></li>
+      <li><b>Poulet rôti</b><span class="prix">28 $</span><p>Jus de rôti, pommes de terre grelot.</p></li>
+      <li><b>Burger du bistro</b><span class="prix">22 $</span><p>Cheddar vieilli, oignons confits, frites.</p></li>
+      <li><b>Risotto de saison</b><span class="prix">25 $</span><p>Légumes du marché, herbes fraîches.</p></li>
+    </ul>
+    <ul class="bi-plats" role="tabpanel" id="p2" aria-labelledby="o2" hidden>
+      <li><b>Crème brûlée</b><span class="prix">10 $</span><p>Vanille de Madagascar.</p></li>
+      <li><b>Tarte tatin</b><span class="prix">11 $</span><p>Pommes du Québec, crème fraîche.</p></li>
+      <li><b>Mousse au chocolat noir</b><span class="prix">10 $</span><p>Fleur de sel, huile d'olive.</p></li>
+      <li><b>Pavlova</b><span class="prix">12 $</span><p>Fruits rouges, chantilly légère.</p></li>
+      <li><b>Fromages d'ici</b><span class="prix">15 $</span><p>Trois fromages, confiture de figues, noix.</p></li>
+    </ul>
+    <ul class="bi-plats" role="tabpanel" id="p3" aria-labelledby="o3" hidden>
+      <li><b>Gamay nature, Loire</b><span class="prix">14 $ · 62 $</span><p>Fruité et vif. Verre ou bouteille.</p></li>
+      <li><b>Chenin sec</b><span class="prix">13 $ · 58 $</span><p>Pomme verte, minéral.</p></li>
+      <li><b>Pinot noir, Niagara</b><span class="prix">15 $ · 68 $</span><p>Cerise, épices douces.</p></li>
+      <li><b>Rosé de Provence</b><span class="prix">12 $ · 52 $</span><p>Sec et léger, pour la terrasse.</p></li>
+      <li><b>Pétillant naturel</b><span class="prix">16 $ · 72 $</span><p>Bulles fines, levures de fermentation.</p></li>
+    </ul>
+    <p class="bi-note-menu">Menu et prix d'exemple. Le menu change selon l'arrivage. Dites-nous vos allergies à la réservation.</p>
+  </div></section>
+
+  <section class="bi-sec bi-resa rv" id="reserver"><div class="bi-in">
+    <p class="bi-eyebrow">Réserver une table</p>
+    <h2 class="bi-t">On vous <em>garde une place</em></h2>
+    <form class="bi-resa-form" onsubmit="return false">
+      <label>Date<input type="date" id="dateResa"></label>
+      <label>Heure<select><option>17 h 00</option><option>17 h 30</option><option>18 h 00</option><option>18 h 30</option><option selected>19 h 00</option><option>19 h 30</option><option>20 h 00</option><option>20 h 30</option></select></label>
+      <label>Personnes<select><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7 ou plus</option></select></label>
+      <button class="bi-btn" type="button" data-demo="Exemple : ce formulaire n'envoie rien.">Réserver</button>
+    </form>
+    <p class="petit">Exemple : cette maquette ne réserve rien. Pour 7 personnes ou plus, on vous appellerait au 450 555-0198.</p>
+  </div></section>
+
+  <section class="bi-sec rv" id="apropos"><div class="bi-in bi-apropos">
+    <img src="img/bistro-about.jpg" alt="Le chef dresse une assiette dans la cuisine ouverte" loading="lazy">
+    <div>
+      <p class="bi-eyebrow">À propos</p>
+      <h2 class="bi-t">Une cuisine <em>qui suit les saisons</em></h2>
+      <p>Chez Philomène, la carte s'écrit chaque semaine, selon ce que les producteurs de la région livrent à la porte. Légumes racines à l'automne, herbes et petits fruits l'été : on cuisine ce qui est bon, sans détour.</p>
+      <p>La cuisine est ouverte, la salle est petite, et les vins viennent de vignerons qu'on connaît. Venez comme vous êtes, on s'occupe du reste.</p>
+      <p class="bi-signe">L'équipe de Philomène</p>
+    </div>
+  </div></section>
+
+  <section class="bi-sec bi-alt rv" id="infos"><div class="bi-in">
+    <p class="bi-eyebrow">Horaires et accès</p>
+    <h2 class="bi-t">Passez <em>à table</em></h2>
+    <div class="bi-infos">
+      <div>
+        <p class="bi-statut" data-statut></p>
+        <ul class="bi-hor" data-horaires></ul>
+        <p class="bi-adr">123, rue Exemple, Brossard QC<br><a href="tel:+14505550198">450 555-0198</a></p>
+      </div>
+      <div>
+        <div class="bi-carte" id="carte">
+          <div class="bi-carte-in"><small>Carte · s'affiche au clic</small><button class="bi-btn contour" type="button" id="carteBtn">Afficher la carte</button></div>
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="300" fill="#e2d6c1"/><g stroke="#f6f0e4" stroke-width="10" fill="none"><path d="M0 90H400M0 210H400M110 0V300M290 0V300"/></g><g stroke="#f6f0e4" stroke-width="4" fill="none"><path d="M0 150H400M200 0V300M0 40H400M0 260H400"/></g><rect x="215" y="100" width="60" height="40" fill="#cfc3a9"/><path d="M200 90c-12 0-21 9-21 21 0 16 21 38 21 38s21-22 21-38c0-12-9-21-21-21z" fill="#a8431f"/><circle cx="200" cy="111" r="7" fill="#fff"/></svg>
+          <div class="bi-carte-pied"><b>Philomène</b><span>123, rue Exemple, Brossard QC · carte illustrée</span></div>
+        </div>
+        <div class="bi-carte-btns"><button class="bi-btn" type="button" data-demo="Exemple : l'itinéraire s'ouvrirait dans l'application de cartes du téléphone.">Itinéraire</button></div>
+      </div>
+    </div>
+  </div></section>
+
+  <footer class="bi-pied">
+    <div class="bi-pied-grille">
+      <div><a class="bi-logo" href="#haut"><b>Philomène</b><small>Bistro de quartier</small></a><p>123, rue Exemple, Brossard QC<br><a href="tel:+14505550198">450 555-0198</a></p></div>
+      <div><h4>Horaires</h4><p>Mer. – jeu. : 17 h – 22 h<br>Ven. – sam. : 17 h – 23 h<br>Dim. : brunch 10 h – 15 h<br>Lun. – mar. : fermé</p></div>
+      <div><h4>Liens</h4><ul><li><a href="#menu">Menu</a></li><li><a href="#reserver">Réserver une table</a></li><li><a href="#infos">Horaires et accès</a></li><li><a href="#" data-demo="Exemple : les cartes-cadeaux ne sont pas incluses.">Carte-cadeau</a></li></ul></div>
+    </div>
+    <div class="bi-legal"><span>© 2026 Philomène · commerce fictif</span><span><a href="#haut">FR</a> | <a href="#" data-demo="Exemple : la version anglaise n'est pas incluse.">EN</a></span><a href="#" data-demo="Exemple : la politique de confidentialité serait rédigée pour le vrai commerce.">Politique de confidentialité</a></div>
+  </footer>
+
+  <div class="bi-barre"><a class="bi-btn contour" href="tel:+14505550198">Appeler</a><a class="bi-btn" href="#reserver">Réserver</a></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+var REDUIT = matchMedia('(prefers-reduced-motion:reduce)').matches;
+var JOURS = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+// Heures d'ouverture par jour (0 = dimanche) : [ouverture, fermeture]
+var HORAIRES = [[10,15],null,null,[17,22],[17,22],[17,23],[17,23]];
+var LIBELLE = {0:'Dimanche (brunch)'};
+function h(x){return x%1 ? Math.floor(x)+' h '+String(Math.round(x%1*60)).padStart(2,'0') : x+' h';}
+function statut(m){
+  var d=m.getDay(),t=m.getHours()+m.getMinutes()/60,p=HORAIRES[d];
+  if(p&&t>=p[0]&&t<p[1])return {ouvert:true,txt:"Ouvert maintenant · jusqu'à "+h(p[1])};
+  for(var i=0;i<=7;i++){var j=(d+i)%7,q=HORAIRES[j];
+    if(q&&(i>0||t<q[0]))return {ouvert:false,txt:'Fermé · ouvre '+(i===0?"aujourd'hui":i===1?'demain':JOURS[j])+' à '+h(q[0])};}
+  return {ouvert:false,txt:'Fermé'};
+}
+(function(){
+  var s=statut(new Date()),el=document.querySelector('[data-statut]');
+  el.textContent=s.txt;el.classList.toggle('ferme',!s.ouvert);
+  var ul=document.querySelector('[data-horaires]'),auj=new Date().getDay();
+  [1,2,3,4,5,6,0].forEach(function(j){var li=document.createElement('li');if(j===auj)li.className='auj';
+    li.innerHTML='<span>'+(LIBELLE[j]||JOURS[j][0].toUpperCase()+JOURS[j].slice(1))+'</span><span>'+(HORAIRES[j]?h(HORAIRES[j][0])+' – '+h(HORAIRES[j][1]):'Fermé')+'</span>';ul.appendChild(li);});
+})();
+document.querySelectorAll('.titre-anim span').forEach(function(m,i){m.style.setProperty('--i',i);});setTimeout(function(){document.documentElement.classList.add('anim-fin')},2600);
+// apparition douce au défilement
+var rv=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window&&!REDUIT){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.06});
+  rv.forEach(function(e){io.observe(e);});
+}else rv.forEach(function(e){e.classList.add('in');});
+// message « exemple »
+var toast=document.getElementById('toast'),tt;
+function dire(m){toast.textContent=m;toast.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toast.classList.remove('on');},3200);}
+document.addEventListener('click',function(e){var d=e.target.closest('[data-demo]');if(d){e.preventDefault();dire(d.dataset.demo);}});
+// onglets du menu
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('#onglets [role=tab]'));
+  function choisir(i,focus){tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===i);t.tabIndex=j===i?0:-1;document.getElementById('p'+j).hidden=j!==i;});if(focus)tabs[i].focus();}
+  tabs.forEach(function(t,i){t.onclick=function(){choisir(i);};
+    t.onkeydown=function(e){if(e.key==='ArrowRight')choisir((i+1)%4,1);else if(e.key==='ArrowLeft')choisir((i+3)%4,1);};});
+})();
+// date de réservation : demain par défaut
+(function(){var d=new Date(Date.now()+864e5),el=document.getElementById('dateResa');
+  var f=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');el.value=f;el.min=f;})();
+// carte au clic (aucun service externe)
+document.getElementById('carteBtn').onclick=function(){document.getElementById('carte').classList.add('on');};
+</script>
+</body>
+</html>
