@@ -6,14 +6,29 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Fiche terrain · Sites web pour commerces de service · Montréal</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.barre-fiche{display:flex;gap:8px;align-items:center;justify-content:space-between;background:#e6efe9;border:1px solid var(--accent);border-radius:12px;padding:8px 8px 8px 12px;margin:12px 0}
+.barre-fiche span{min-width:0;overflow-wrap:anywhere;font-weight:700}
+.barre-fiche .btn{flex:none;padding:8px 12px;font-size:16px}
+#panneau{position:fixed;inset:0;z-index:60;background:var(--fond);overflow:auto;padding:16px}
+#panneau[hidden]{display:none}
+#panneau .interne{max-width:960px;margin:0 auto}
+.fiche-ligne{background:#fff;border:1px solid var(--trait);border-radius:12px;padding:12px;margin-bottom:10px}
+.fiche-ligne.cour{border:2px solid var(--accent)}
+.fiche-ligne b{overflow-wrap:anywhere}
+.fiche-ligne small{display:block;color:var(--doux)}
+.fiche-ligne .boutons{margin-top:8px}
+.fiche-ligne .btn{padding:8px 14px;font-size:16px}
+</style>
 </head>
 <body class="pg fiche">
 <div class="badge-ligne"><span class="badge">Version d'essai · 13 novembre 2026</span></div>
 <nav class="barre-site" aria-label="Navigation"><a href="index.html">Guide</a><a href="exemples.html">Exemples</a><a href="fiche.html" aria-current="page">Fiche</a></nav>
 <main class="contenu">
+<div class="barre-fiche"><span id="fiche-en-cours">Fiche en cours : Nouvelle fiche</span><button type="button" class="btn clair" id="mes-fiches">Mes fiches (0)</button></div>
 <h1>Fiche terrain</h1>
 <p class="lead">2 minutes : remplis l'essentiel, on s'occupe du reste.</p>
-<p class="aide" style="margin-top:-8px">Les champs avec * sont obligatoires. Le brouillon s'enregistre tout seul sur ce téléphone.</p>
+<p class="aide" style="margin-top:-8px">Les champs avec * sont obligatoires. La fiche s'enregistre toute seule sur ce téléphone.</p>
 <p class="aide" style="background:#e7efe9;border-radius:10px;padding:10px 12px;color:#1f4d3a"><b>🎤 Astuce :</b> pour aller vite, touche le micro du clavier de ton téléphone et dicte au lieu d'écrire. Ça marche dans tous les champs, surtout les notes et « Ce qui manque ».</p>
 
 <form id="fiche" novalidate autocomplete="off">
@@ -53,6 +68,14 @@
     <label><input type="radio" name="forfait" value="Pro"> Pro · 399 $</label>
     <label><input type="radio" name="forfait" value="Complet"> Complet · 499 $</label>
     <label><input type="radio" name="forfait" value="Ne sait pas encore"> Ne sait pas encore</label>
+  </div>
+  <label>Contenu mensuel envisagé</label>
+  <div class="choix">
+    <label><input type="radio" name="contenu_mensuel" value="Aucun"> Aucun</label>
+    <label><input type="radio" name="contenu_mensuel" value="Présence"> Présence</label>
+    <label><input type="radio" name="contenu_mensuel" value="Contenu"> Contenu</label>
+    <label><input type="radio" name="contenu_mensuel" value="Contenu+"> Contenu+</label>
+    <label><input type="radio" name="contenu_mensuel" value="Ne sait pas encore"> Ne sait pas encore</label>
   </div>
   <label for="prix_depart">Prix de départ que tu proposes ($)</label>
   <input type="number" id="prix_depart" name="prix_depart" min="0" step="1" inputmode="numeric">
@@ -142,12 +165,13 @@
   <label>Options</label>
   <div class="choix">
     <label><input type="checkbox" name="option" value="Prise de rendez-vous en ligne"> Prise de rendez-vous en ligne</label>
-    <label><input type="checkbox" name="option" value="Catalogue de services"> Catalogue de services</label>
-    <label><input type="checkbox" name="option" value="Réalisations"> Réalisations</label>
-    <label><input type="checkbox" name="option" value="Conseils chaque mois"> Conseils chaque mois</label>
-    <label><input type="checkbox" name="option" value="Réseaux sociaux"> Réseaux sociaux</label>
+    <label><input type="checkbox" name="option" value="Catalogue de services ou produits"> Catalogue de services ou produits</label>
+    <label><input type="checkbox" name="option" value="Réalisations avant / après"> Réalisations avant / après</label>
+    <label><input type="checkbox" name="option" value="Mini-clip vidéo"> Mini-clip vidéo</label>
+    <label><input type="checkbox" name="option" value="Mensuel : Présence"> Mensuel : Présence</label>
+    <label><input type="checkbox" name="option" value="Mensuel : Contenu (2 mini-clips par mois)"> Mensuel : Contenu (2 mini-clips par mois)</label>
+    <label><input type="checkbox" name="option" value="Mensuel : Contenu+ (4 mini-clips par mois + réseaux)"> Mensuel : Contenu+ (4 mini-clips par mois + réseaux)</label>
     <label><input type="checkbox" name="option" value="Courriels aux clients"> Courriels aux clients</label>
-    <label><input type="checkbox" name="option" value="Vidéo"> Vidéo</label>
   </div>
   <label>Haut de page préféré</label>
   <div class="choix bloc">
@@ -200,8 +224,19 @@
   <button type="button" class="btn" id="partager">Partager la fiche</button>
   <button type="button" class="btn sec" id="copier">Copier</button>
   <button type="button" class="btn sec" id="telecharger">Télécharger (.txt)</button>
-  <button type="button" class="btn danger" id="nouvelle">Nouvelle fiche</button>
+  <button type="button" class="btn sec" id="nouvelle">Nouvelle fiche</button>
 </div>
+<section id="panneau" hidden aria-label="Mes fiches"><div class="interne">
+  <h2>Mes fiches</h2>
+  <p class="aide">Les fiches restent sur ce téléphone. Envoie chaque fiche après la visite, et fais « Tout télécharger » le soir en sauvegarde.</p>
+  <div class="boutons">
+    <button type="button" class="btn" id="p-nouvelle">+ Nouvelle fiche</button>
+    <button type="button" class="btn clair" id="p-tout">Tout télécharger (.txt)</button>
+    <button type="button" class="btn clair" id="p-fermer">Fermer</button>
+  </div>
+  <p class="statut" id="p-statut" role="status" aria-live="polite"></p>
+  <div id="p-liste"></div>
+</div></section>
 <script src="fiche.js"></script>
 </body>
 </html>
